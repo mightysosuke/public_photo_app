@@ -1,14 +1,3 @@
-<% if flash[:alert] %>
-  <div style="color:red">
-    <ul>
-      <% flash[:alert].each do |error| %>
-        <li><%= error %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
-
 <h1>ログイン</h1>
 
 <%= form_with url: session_path do |form| %>
