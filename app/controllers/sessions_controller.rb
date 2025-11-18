@@ -6,11 +6,30 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    email_address = params[:email_address]
+    password = params[:password]
+    errors = []
+
+    if email_address.blank?
+      errors << "メールアドレスを入力してください。"
+    end
+
+    if password.blank?
+      errors << "パスワードを入力してください。"
+    end
+
+    if errors.any?
+      flash.now[:alert] = errors
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+    if user = User.authenticate_by(email_address: email_address, password: password)
       start_new_session_for user
       redirect_to after_authentication_url
     else
-      redirect_to new_session_path, alert: "Try another email address or password."
+      flash.now[:alert] = ["メールアドレスまたはパスワードが正しくありません。"]
+      render :new, status: :unprocessable_entity
     end
   end
 
