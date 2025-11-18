@@ -5,4 +5,10 @@ class PhotosController < ApplicationController
     # @photos = Current.user.photos
     @photos = Photo.all
   end
+
+  def new
+  end
+
+  def create
+  end
 end
