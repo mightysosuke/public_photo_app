@@ -1,0 +1,21 @@
+<% if flash[:alert] %>
+  <div style="color:red">
+    <ul>
+      <% flash[:alert].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<h1>ログイン</h1>
+
+<%= form_with url: session_path do |form| %>
+  <%= form.label :email_address, "メールアドレス" %>
+  <%= form.email_field :email_address, autofocus: true, autocomplete: "username", value: params[:email_address] %><br>
+  <%= form.label :password, "パスワード" %>
+  <%= form.password_field :password, autocomplete: "current-password" %><br>
+  <%= form.submit "ログインする" %>
+<% end %>
+<br>
