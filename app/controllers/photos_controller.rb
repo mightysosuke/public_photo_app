@@ -1,7 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    # @photos = Current.user.photos
-    @photos = Photo.all
+    @photos = Current.user.photos.order(created_at: :desc)
   end
 
   def new

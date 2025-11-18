@@ -2,7 +2,15 @@
 <h1>写真一覧</h1>
 <%= link_to '写真を新規にアップロード', new_photo_path %>
 
+<div class="photo-grid">
   <% @photos.each do |photo| %>
-    <p><%= photo.title %></p>
-    <%= image_tag photo.image %>
+    <div class="photo-item">
+      <div class="photo-title">
+        <%= photo.title %>
+      </div>
+      <div class="photo-frame">
+        <%= image_tag photo.image, class: 'photo-image' %>
+      </div>
+    </div>
   <% end %>
+</div>
