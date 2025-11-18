@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      photo: 写真
+    attributes:
+      user:
+        email_address: メールアドレス
+      photo:
+        title: タイトル
+        image: 画像
