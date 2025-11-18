@@ -1,15 +1,24 @@
 class PhotosController < ApplicationController
-  allow_unauthenticated_access only: [ :index ]
-
   def index
     # @photos = Current.user.photos
     @photos = Photo.all
   end
 
   def new
-    @photo = Photo.new
+    @photo = Current.user.photos.build
   end
 
   def create
+    @photo = Current.user.photos.build(photo_params)
+    if @photo.save
+      redirect_to photos_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def photo_params
+    params.require(:photo).permit(:title, :image)
   end
 end

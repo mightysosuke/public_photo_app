@@ -24,6 +24,16 @@
   </head>
 
   <body>
+    <% if flash[:alert] %>
+      <div class="error-alert">
+        <ul>
+          <% flash[:alert].each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
     <%= yield %>
   </body>
 </html>
