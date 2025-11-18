@@ -2,6 +2,7 @@
 <h1>写真アップロード</h1>
 
 <%= form_with model: @photo do |form| %>
+  <%= render 'layouts/error_messages', model: form.object %>
   <%= form.label :title, "タイトル" %>
   <%= form.text_field :title %><br>
   <%= form.label :image, "画像ファイル" %>
