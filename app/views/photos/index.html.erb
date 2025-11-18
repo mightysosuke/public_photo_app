@@ -1,5 +1,6 @@
 <%= link_to 'ログアウト', session_path, data: { turbo_method: :delete } %>
 <h1>写真一覧</h1>
+<%= link_to 'Twitterと連携', oauth_authorize_path %><br>
 <%= link_to '写真を新規にアップロード', new_photo_path %>
 
 <div class="photo-grid">
