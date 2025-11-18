@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       start_new_session_for user
       redirect_to after_authentication_url
     else
-      flash.now[:alert] = ["メールアドレスまたはパスワードが正しくありません。"]
+      flash.now[:alert] = [ "メールアドレスまたはパスワードが正しくありません。" ]
       render :new, status: :unprocessable_entity
     end
   end
