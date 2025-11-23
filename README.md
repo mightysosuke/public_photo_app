@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 実行するコマンド
 
-Things you may want to cover:
+### サーバーを起動するまでの準備
+```bash
 
-* Ruby version
+# gemのインストール
+$ bundle install
+# データベースのマイグレーション
+$ rails db:migrate
+```
 
-* System dependencies
+### サーバーの起動
+```bash
+# railsサーバーの起動
+$ bin/rails server
+```
+`http://localhost:3000`に接続することで、ログイン画面が表示されます。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### テストの実行
+```bash
+$ bundle exec rspec
+```
