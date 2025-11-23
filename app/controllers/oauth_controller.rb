@@ -9,7 +9,7 @@ class OauthController < ApplicationController
     params = {
       response_type: "code",
       client_id: Rails.application.credentials.twitter[:client_id],
-      redirect_uri: "http://localhost:3000/oauth/callback",
+      redirect_uri: oauth_callback_url,
       scope: "write_tweet"
     }
 
@@ -23,7 +23,7 @@ class OauthController < ApplicationController
     token_params = {
       grant_type: "authorization_code",
       code: code,
-      redirect_uri: "http://localhost:3000/oauth/callback",
+      redirect_uri: oauth_callback_url,
       client_id: Rails.application.credentials.twitter[:client_id],
       client_secret: Rails.application.credentials.twitter[:client_secret]
     }
