@@ -15,4 +15,11 @@ RSpec.describe "Photos", type: :request do
       end
     end
   end
+
+  describe "GET /photos/new" do
+    it "successのステータスが返ってくること" do
+      get new_photo_path
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
