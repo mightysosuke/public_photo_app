@@ -22,4 +22,39 @@ RSpec.describe "Photos", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "POST /photos" do
+    let(:image) { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test.png'), 'image/png') }
+
+    context "titleもimageも正常な値がリクエストされている場合" do
+      it "写真が作成されてリダイレクトすること" do
+        expect {
+          post photos_path, params: { photo: { title: "新しい写真", image: image } }
+        }.to change(Photo, :count).by(1)
+
+        expect(response).to have_http_status(:redirect)
+        expect(response).to redirect_to(photos_path)
+      end
+    end
+
+    context "titleが空の場合" do
+      it "写真が作成されずエラーが表示されること" do
+        expect {
+          post photos_path, params: { photo: { title: nil, image: image } }
+        }.not_to change(Photo, :count)
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+
+    context "imageが空の場合" do
+      it "写真が作成されずエラーが表示されること" do
+        expect {
+          post photos_path, params: { photo: { title: "タイトル", image: nil } }
+        }.not_to change(Photo, :count)
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
 end
