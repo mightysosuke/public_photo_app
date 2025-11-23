@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "photos#index"
-  resources :photos, only: [ :index, :new, :create ]
+  resources :photos, only: [ :index, :new, :create ] do
+    member do
+      post :tweet
+    end
+  end
   get "oauth/authorize", to: "oauth#authorize"
   get "oauth/callback", to: "oauth#callback"
 end
