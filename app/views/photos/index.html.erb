@@ -12,6 +12,9 @@
       <div class="photo-frame">
         <%= image_tag photo.image, class: 'photo-image' %>
       </div>
+      <% if session[:twitter_access_token].present? %>
+        <%= button_to 'ツイートする', tweet_photo_path(photo), class: 'tweet-button' %>
+      <% end %>
     </div>
   <% end %>
 </div>
