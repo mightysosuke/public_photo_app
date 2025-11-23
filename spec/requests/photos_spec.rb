@@ -57,4 +57,37 @@ RSpec.describe "Photos", type: :request do
       end
     end
   end
+
+  describe "POST /photos/:id/tweet" do
+    let(:photo) { create(:photo, user: user) }
+    let(:mock_response) { instance_double(Net::HTTPResponse) }
+
+    before do
+      allow(Net::HTTP).to receive(:start).and_return(mock_response)
+    end
+
+    context "ツイートが成功した場合" do
+      before do
+        allow(mock_response).to receive(:code).and_return("201")
+      end
+
+      it "リダイレクトしてnoticeが返されること" do
+        post tweet_photo_path(photo)
+        expect(response).to redirect_to(photos_path)
+        expect(flash[:notice]).to eq("ツイートしました")
+      end
+    end
+
+    context "ツイートが失敗した場合" do
+      before do
+        allow(mock_response).to receive(:code).and_return("400")
+      end
+
+      it "リダイレクトしてalertが返されること" do
+        post tweet_photo_path(photo)
+        expect(response).to redirect_to(photos_path)
+        expect(flash[:alert]).to eq("ツイートに失敗しました")
+      end
+    end
+  end
 end
